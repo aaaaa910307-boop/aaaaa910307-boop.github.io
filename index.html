@@ -17,78 +17,315 @@
     }
   }
   * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body { margin: 0; background: var(--bg); color: var(--text);
     font: 17px/1.8 -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", sans-serif; }
-  .wrap { max-width: 880px; margin: 0 auto; padding: 0 16px; }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 16px; }
   a { color: var(--accent); }
 
+  /* 導覽列 */
+  nav { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 82%, transparent);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 56px; gap: 12px; }
+  nav .logo { font-weight: 800; letter-spacing: .05em; text-decoration: none; color: var(--text); }
+  nav ul { display: flex; gap: 18px; list-style: none; margin: 0; padding: 0; font-size: .9rem; overflow-x: auto; }
+  nav ul a { color: var(--muted); text-decoration: none; white-space: nowrap; }
+  nav ul a:hover { color: var(--accent); }
+
   /* 首頁大區塊 */
-  .hero { display: grid; grid-template-columns: 1fr 1.1fr; gap: 48px; align-items: center; padding: 72px 0 56px; }
-  .hero img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 45% 30%;
-    border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,.18); display: block; }
+  .hero { position: relative; display: grid; grid-template-columns: 1fr 1.1fr; gap: 48px; align-items: center; padding: 64px 0 56px; }
+  .photo { position: relative; }
+  .photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 45% 30%;
+    border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,.18); display: block; position: relative; z-index: 1; }
+  .photo::before { content: ""; position: absolute; inset: 18px -18px -18px 18px; border-radius: 24px;
+    border: 2px solid var(--accent); opacity: .5; }
+  .badge { position: absolute; z-index: 2; left: -12px; bottom: 28px; background: var(--card); color: var(--text);
+    border: 1px solid var(--line); border-radius: 999px; padding: 8px 16px; font-size: .85rem; font-weight: 600;
+    box-shadow: 0 10px 24px rgba(0,0,0,.12); animation: float 4s ease-in-out infinite; }
+  @keyframes float { 50% { transform: translateY(-8px); } }
   .hi { color: var(--muted); letter-spacing: .1em; font-size: .9rem; margin: 0; }
-  h1 { font-size: clamp(2.4rem, 7vw, 3.6rem); line-height: 1.15; margin: 8px 0 16px; letter-spacing: .02em; }
-  .lead { font-size: 1.15rem; margin: 0; }
+  h1 { font-size: clamp(2.6rem, 7vw, 3.8rem); line-height: 1.15; margin: 8px 0 16px; letter-spacing: .02em; }
+  .lead { font-size: 1.15rem; margin: 0 0 24px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 28px; padding: 0; list-style: none; }
+  .tags li { background: var(--soft); color: var(--accent); padding: 4px 12px; border-radius: 999px; font-size: .85rem; font-weight: 600; }
+  .btns { display: flex; flex-wrap: wrap; gap: 10px; }
+  .btn { text-decoration: none; padding: 12px 22px; border-radius: 999px; font-weight: 700; font-size: .95rem; }
+  .btn.main { background: var(--accent); color: var(--bg); }
+  .btn.ghost { border: 1.5px solid var(--line); color: var(--text); }
+  .btn:hover { filter: brightness(1.08); }
 
-  section { padding: 40px 0; border-top: 1px solid var(--line); }
-  h2 { font-size: .85rem; letter-spacing: .2em; color: var(--muted); font-weight: 600; margin: 0 0 16px; }
-  .about p { margin: 0 0 1em; max-width: 60ch; }
+  /* 跑馬燈 */
+  .marquee { overflow: hidden; border-block: 1px solid var(--line); padding: 14px 0; white-space: nowrap; color: var(--muted); font-weight: 600; letter-spacing: .1em; }
+  .marquee span { display: inline-block; animation: slide 28s linear infinite; }
+  @keyframes slide { to { transform: translateX(-50%); } }
 
-  .likes { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px; }
-  .like { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 18px; }
-  .like .icon { font-size: 1.6rem; line-height: 1; }
-  .like b { display: block; margin-top: 10px; }
+  section { padding: 64px 0; }
+  .label { font-size: .8rem; letter-spacing: .25em; color: var(--accent); font-weight: 700; margin: 0 0 8px; }
+  h2 { font-size: clamp(1.6rem, 4vw, 2.1rem); line-height: 1.3; margin: 0 0 24px; }
+
+  /* 關於我 */
+  .about { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: start; }
+  .about p { margin: 0 0 1em; }
+  .facts { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+  .facts li { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 12px 16px; display: flex; gap: 12px; align-items: center; }
+  .facts li b { font-size: 1.3rem; }
+  .facts small { display: block; color: var(--muted); font-size: .8rem; line-height: 1.4; }
+
+  /* 喜歡的事 */
+  .likes { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
+  .like { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 22px; transition: transform .2s, box-shadow .2s; }
+  .like:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(0,0,0,.08); }
+  .like .icon { font-size: 2rem; line-height: 1; }
+  .like b { display: block; margin-top: 12px; font-size: 1.05rem; }
   .like span { color: var(--muted); font-size: .9rem; line-height: 1.6; display: block; }
 
-  .contact { display: flex; flex-wrap: wrap; gap: 10px; }
+  /* 最近在做 */
+  .timeline { list-style: none; margin: 0; padding: 0 0 0 24px; border-left: 2px solid var(--line); }
+  .timeline li { position: relative; padding: 0 0 28px 12px; }
+  .timeline li::before { content: ""; position: absolute; left: -32px; top: 8px; width: 14px; height: 14px; border-radius: 50%;
+    background: var(--bg); border: 3px solid var(--accent); }
+  .timeline time { color: var(--accent); font-weight: 700; font-size: .85rem; }
+  .timeline b { display: block; }
+  .timeline span { color: var(--muted); font-size: .95rem; }
+
+  /* 語錄 */
+  .quote { text-align: center; padding: 72px 16px; }
+  .quote p { font-size: clamp(1.3rem, 3.6vw, 1.9rem); line-height: 1.6; margin: 0 auto; max-width: 22em; font-weight: 700; }
+  .quote p::before { content: "“"; display: block; font-size: 3.5rem; line-height: 1; color: var(--accent); }
+
+  /* 聯絡 */
+  .cta { background: var(--card); border: 1px solid var(--line); border-radius: 28px; padding: 48px 32px; text-align: center; }
+  .cta h2 { margin-bottom: 8px; }
+  .cta p { color: var(--muted); margin: 0 0 24px; }
+  .contact { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
   .contact a { text-decoration: none; background: var(--soft); color: var(--accent);
-    padding: 10px 18px; border-radius: 999px; font-weight: 600; font-size: .95rem; }
-  .contact a:hover { filter: brightness(.95); }
+    padding: 12px 22px; border-radius: 999px; font-weight: 700; font-size: .95rem; }
 
-  footer { padding: 32px 0 48px; color: var(--muted); font-size: .8rem; border-top: 1px solid var(--line); }
+  footer { padding: 40px 0 56px; color: var(--muted); font-size: .8rem; text-align: center; }
 
-  @media (max-width: 680px) {
-    .hero { grid-template-columns: 1fr; gap: 28px; padding: 32px 0 40px; }
-    .hero img { max-width: 360px; }
+  /* 捲動淡入 */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.show { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .badge, .marquee span { animation: none; }
+  }
+
+  /* ===== 星球宇宙風格 ===== */
+  :root, :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #070818; --card: rgba(255,255,255,.05); --text: #eef0ff; --muted: #a9addb;
+    --line: rgba(255,255,255,.12); --accent: #b79cff; --soft: rgba(183,156,255,.16);
+  }
+  body { background:
+      radial-gradient(900px 500px at 85% 0%, rgba(120,80,255,.28), transparent 60%),
+      radial-gradient(700px 500px at 0% 40%, rgba(40,140,255,.18), transparent 60%),
+      radial-gradient(800px 600px at 60% 100%, rgba(255,90,180,.14), transparent 60%),
+      #070818;
+    background-attachment: fixed; overflow-x: hidden; }
+  #stars { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+  nav, main, .marquee, .quote, footer { position: relative; z-index: 1; }
+  nav { background: rgba(7,8,24,.6); }
+
+  /* 漂浮的星球 */
+  .planets { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+  .planet { position: absolute; border-radius: 50%; animation: drift 14s ease-in-out infinite; }
+  .p1 { width: 150px; height: 150px; right: 6%; top: 14%;
+    background: radial-gradient(circle at 32% 30%, #ffd6a8, #e8835f 45%, #7a2f4a 80%);
+    box-shadow: inset -22px -18px 40px rgba(0,0,0,.45), 0 0 60px rgba(255,150,100,.35); }
+  .p1::after { content: ""; position: absolute; left: -45%; top: 42%; width: 190%; height: 18%;
+    border-radius: 50%; border: 6px solid rgba(255,220,180,.55); border-top-color: transparent;
+    transform: rotate(-18deg); }
+  .p2 { width: 70px; height: 70px; left: 4%; top: 58%; animation-duration: 18s; animation-delay: -4s;
+    background: radial-gradient(circle at 35% 30%, #a8f0ff, #3f8de0 50%, #1c2f7a 85%);
+    box-shadow: inset -12px -10px 22px rgba(0,0,0,.5), 0 0 40px rgba(80,170,255,.4); }
+  .p3 { width: 34px; height: 34px; right: 22%; top: 72%; animation-duration: 11s; animation-delay: -7s;
+    background: radial-gradient(circle at 35% 30%, #fff, #c9c3e8 55%, #6e6890);
+    box-shadow: inset -6px -5px 10px rgba(0,0,0,.45), 0 0 24px rgba(255,255,255,.3); }
+  .p4 { width: 90px; height: 90px; left: 38%; top: 92%; animation-duration: 20s;
+    background: radial-gradient(circle at 35% 30%, #ffc2ec, #c45bd6 50%, #4b1f73 85%);
+    box-shadow: inset -14px -12px 26px rgba(0,0,0,.5), 0 0 50px rgba(200,90,220,.35); }
+  @keyframes drift { 50% { transform: translate(-12px, -22px) rotate(6deg); } }
+
+  /* 照片：星球＋軌道 */
+  .photo img { border-radius: 50%; aspect-ratio: 1; object-position: 45% 35%;
+    box-shadow: 0 0 0 6px rgba(183,156,255,.25), 0 0 80px rgba(150,110,255,.45); }
+  .photo::before { inset: -26px; border-radius: 50%; border: 1.5px dashed rgba(183,156,255,.55); opacity: 1;
+    animation: spin 40s linear infinite; }
+  .photo { container-type: inline-size; }
+  .photo::after { content: "🪐"; position: absolute; z-index: 2; top: 50%; left: 50%; width: 40px; height: 40px;
+    margin: -20px 0 0 -20px; font-size: 2rem; line-height: 40px; text-align: center;
+    animation: orbit 16s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes orbit {
+    from { transform: rotate(0deg) translateX(calc(50cqw + 26px)) rotate(0deg); }
+    to { transform: rotate(360deg) translateX(calc(50cqw + 26px)) rotate(-360deg); }
+  }
+  .badge { background: rgba(20,18,50,.85); border-color: rgba(183,156,255,.4); color: #fff; }
+  h1 { background: linear-gradient(90deg, #fff, #d8c8ff 50%, #9fd0ff); -webkit-background-clip: text; background-clip: text;
+    color: transparent; text-shadow: none; filter: drop-shadow(0 0 18px rgba(183,156,255,.35)); }
+  .hi { color: var(--accent); }
+  .btn.main { background: linear-gradient(90deg, #9b7bff, #5fa8ff); color: #fff; box-shadow: 0 8px 30px rgba(130,110,255,.45); }
+  .like, .facts li, .cta { backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+  .like:hover { box-shadow: 0 0 0 1px rgba(183,156,255,.5), 0 14px 40px rgba(130,100,255,.25); }
+  .timeline li::before { background: #070818; box-shadow: 0 0 12px var(--accent); }
+  .quote p::before { content: "✦"; font-size: 2rem; margin-bottom: 8px; }
+  .cta { background: linear-gradient(135deg, rgba(155,123,255,.18), rgba(95,168,255,.12)); }
+
+  @media (max-width: 1100px) {
+    .p1 { width: 120px; height: 120px; right: -40px; top: 64px; }
+  }
+  @media (max-width: 720px) {
+    .p1 { width: 90px; height: 90px; right: -20px; top: 9%; }
+    .p4 { display: none; }
+    nav ul { gap: 14px; }
+    .hero { grid-template-columns: 1fr; gap: 32px; padding: 32px 0 48px; }
+    .photo { max-width: 340px; }
+    .about { grid-template-columns: 1fr; gap: 24px; }
+    section { padding: 48px 0; }
+    .cta { padding: 36px 20px; }
   }
 </style>
 </head>
 <body>
-<main class="wrap">
+<canvas id="stars" aria-hidden="true"></canvas>
+<div class="planets" aria-hidden="true">
+  <div class="planet p1"></div><div class="planet p2"></div><div class="planet p3"></div><div class="planet p4"></div>
+</div>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#top">芊瑜</a>
+    <ul>
+      <li><a href="#about">關於我</a></li>
+      <li><a href="#likes">喜歡的事</a></li>
+      <li><a href="#now">最近在做</a></li>
+      <li><a href="#contact">找到我</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="wrap" id="top">
 
   <header class="hero">
-    <img src="IMG_8804%202.jpg" alt="郭芊瑜在夜晚的山上看城市燈火">
+    <div class="photo">
+      <img src="IMG_8804%202.jpg" alt="郭芊瑜在夜晚的山上看城市燈火">
+      <div class="badge">✨ 來自 B612 星球</div>
+    </div>
     <div>
       <p class="hi">HELLO, I'M</p>
       <h1>郭芊瑜</h1>
       <p class="lead">喜歡在夜裡上山看城市的燈火，也正在學著用程式，一點一點打造屬於自己的小角落。</p>
+      <ul class="tags">
+        <li>#宇宙迷</li><li>#夜景控</li><li>#爬山</li><li>#網頁新手</li>
+      </ul>
+      <div class="btns">
+        <a class="btn main" href="https://www.instagram.com/_chienu_/" target="_blank" rel="noopener">追蹤我的 IG</a>
+        <a class="btn ghost" href="#about">認識我 ↓</a>
+      </div>
     </div>
   </header>
+</main>
 
-  <section class="about">
-    <h2>關於我</h2>
-    <p>嗨，我是芊瑜。這裡是我在網路上的小角落，記錄我是誰、喜歡什麼，還有正在學習的事情。</p>
-    <p>平常喜歡往山上跑，尤其是晚上，看著遠方一整片城市的燈光，會覺得很安靜也很療癒。最近開始學寫網頁，這個網站就是我做的第一個作品。</p>
+<div class="marquee" aria-hidden="true"><span>🪐 PLANETS ✦ STARS ✦ NIGHT VIEW ✦ MOUNTAINS ✦ CODING ✦ 芊瑜的小宇宙 ✦ 🪐 PLANETS ✦ STARS ✦ NIGHT VIEW ✦ MOUNTAINS ✦ CODING ✦ 芊瑜的小宇宙 ✦&nbsp;</span></div>
+
+<main class="wrap">
+
+  <section id="about" class="reveal">
+    <p class="label">ABOUT ME</p>
+    <h2>嗨，我是芊瑜 👋</h2>
+    <div class="about">
+      <div>
+        <p>這裡是我在網路上的小宇宙，記錄我是誰、喜歡什麼，還有正在學習的事情。</p>
+        <p>平常喜歡往山上跑，尤其是晚上，看著遠方一整片城市的燈光，會覺得很安靜也很療癒。最近開始學寫網頁，這個網站就是我做的第一個作品。</p>
+        <p>希望之後這裡會越來越豐富，也歡迎你來 IG 跟我打聲招呼！</p>
+      </div>
+      <ul class="facts">
+        <li><b>🌃</b><div>最喜歡的時刻<small>山上的夜晚，城市燈火亮起來的時候</small></div></li>
+        <li><b>🪐</b><div>喜歡的東西<small>星星、星球，和一望無際的夜空</small></div></li>
+        <li><b>✨</b><div>2026 的小目標<small>做出一個自己很滿意的網站</small></div></li>
+      </ul>
+    </div>
   </section>
 
-  <section>
+  <section id="likes" class="reveal">
+    <p class="label">THINGS I LOVE</p>
     <h2>喜歡的事</h2>
     <div class="likes">
-      <div class="like"><div class="icon">🌃</div><b>夜景</b><span>山上的風和城市的燈</span></div>
+      <div class="like"><div class="icon">🌃</div><b>夜景</b><span>山上的風和城市的燈，看多久都不會膩</span></div>
       <div class="like"><div class="icon">⛰️</div><b>爬山</b><span>走一段路，換一片風景</span></div>
-      <div class="like"><div class="icon">💻</div><b>寫網頁</b><span>正在學，邊做邊玩</span></div>
+      <div class="like"><div class="icon">💻</div><b>寫網頁</b><span>正在學，邊做邊玩，這個網站就是成果</span></div>
+      <div class="like"><div class="icon">🔭</div><b>看星星</b><span>抬頭找找今晚有哪些星星</span></div>
       <div class="like"><div class="icon">📷</div><b>拍照</b><span>把喜歡的瞬間留下來</span></div>
     </div>
   </section>
 
-  <section>
-    <h2>找到我</h2>
-    <div class="contact">
-      <a href="https://www.instagram.com/_chienu_/" target="_blank" rel="noopener">Instagram @_chienu_</a>
+  <section id="now" class="reveal">
+    <p class="label">WHAT I'M UP TO</p>
+    <h2>最近在做</h2>
+    <ol class="timeline">
+      <li><time>2026 · 11</time><b>做出第一個個人網站 🎉</b><span>從零開始，學會把網頁放上 GitHub</span></li>
+      <li><time>持續中</time><b>收集更多夜景</b><span>想把喜歡的觀景點一個一個走過</span></li>
+      <li><time>下一步</time><b>讓網站越來越豐富</b><span>加入更多照片和生活紀錄</span></li>
+    </ol>
+  </section>
+</main>
+
+<div class="quote reveal">
+  <p>每個人都是一顆星球，<br>在宇宙裡慢慢發光。</p>
+</div>
+
+<main class="wrap">
+  <section id="contact" class="reveal">
+    <div class="cta">
+      <p class="label">SAY HI</p>
+      <h2>一起交個朋友吧</h2>
+      <p>想聊天、分享夜景景點，都歡迎私訊我</p>
+      <div class="contact">
+        <a href="https://www.instagram.com/_chienu_/" target="_blank" rel="noopener">📸 Instagram @_chienu_</a>
+      </div>
     </div>
   </section>
-
-  <footer>© 2026 郭芊瑜</footer>
 </main>
+
+<footer>© 2026 郭芊瑜 · 來自我的小宇宙 🪐</footer>
+
+<script>
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add("show"); io.unobserve(e.target); }
+  }), { threshold: 0.15 });
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+  // 閃爍的星星＋流星
+  const cv = document.getElementById("stars"), cx = cv.getContext("2d");
+  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let W, H, stars = [], shoot = null;
+  function size() {
+    W = cv.width = innerWidth * devicePixelRatio; H = cv.height = innerHeight * devicePixelRatio;
+    stars = Array.from({ length: Math.round(innerWidth * innerHeight / 3500) }, () => ({
+      x: Math.random() * W, y: Math.random() * H, r: (Math.random() * 1.3 + .3) * devicePixelRatio,
+      p: Math.random() * Math.PI * 2, s: Math.random() * .02 + .005 }));
+  }
+  function draw() {
+    cx.clearRect(0, 0, W, H);
+    for (const st of stars) {
+      st.p += st.s; const a = still ? .8 : .45 + Math.sin(st.p) * .45;
+      cx.globalAlpha = a; cx.fillStyle = "#fff"; cx.beginPath(); cx.arc(st.x, st.y, st.r, 0, 7); cx.fill();
+    }
+    if (!still) {
+      if (!shoot && Math.random() < .004) shoot = { x: Math.random() * W, y: Math.random() * H * .4, l: 0 };
+      if (shoot) {
+        shoot.l += 1; const len = 120 * devicePixelRatio, d = shoot.l * 14 * devicePixelRatio;
+        const g = cx.createLinearGradient(shoot.x + d, shoot.y + d * .5, shoot.x + d - len, shoot.y + (d - len) * .5);
+        g.addColorStop(0, "rgba(255,255,255,.9)"); g.addColorStop(1, "rgba(255,255,255,0)");
+        cx.globalAlpha = 1; cx.strokeStyle = g; cx.lineWidth = 2 * devicePixelRatio; cx.beginPath();
+        cx.moveTo(shoot.x + d, shoot.y + d * .5); cx.lineTo(shoot.x + d - len, shoot.y + (d - len) * .5); cx.stroke();
+        if (shoot.l > 40) shoot = null;
+      }
+      requestAnimationFrame(draw);
+    }
+  }
+  addEventListener("resize", size); size(); draw();
+</script>
 </body>
 </html>
