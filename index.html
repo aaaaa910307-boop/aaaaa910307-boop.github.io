@@ -102,14 +102,30 @@
   .portrait figcaption { margin-top: 10px; font-size: .8rem; color: var(--muted); letter-spacing: .1em; border-top: 1px solid #ccc; padding-top: 8px; }
   .portrait .tag { position: absolute; top: 16px; left: -12px; background: var(--red); color: #fff; font: 400 1rem "Bebas Neue"; letter-spacing: .2em; padding: 4px 12px 2px; }
 
-  /* 喜歡的事：編輯清單 */
-  .loves { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0 48px; }
-  .loves li { display: grid; grid-template-columns: 58px 1fr; gap: 14px; padding: 22px 0; border-bottom: 1px solid #ccc; }
-  .loves .n { font: 400 2.8rem/1 "Bebas Neue", sans-serif; color: #ddd; transition: color .2s; }
-  .loves li:hover .n { color: var(--red); }
-  .loves b { display: block; font: 700 1.25rem "Noto Serif TC", serif; }
-  .loves b span { font: italic 500 1rem "Cormorant Garamond", serif; color: var(--muted); margin-left: 8px; }
-  .loves p { margin: 4px 0 0; color: #444; font-size: .95rem; }
+
+  /* 每月 DUMP */
+  .month { margin-bottom: 56px; }
+  .month:last-child { margin-bottom: 0; }
+  .mh { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; border-bottom: 2px solid var(--ink); padding-bottom: 10px; }
+  .mh .m { font: 400 3.6rem/0.9 "Bebas Neue", sans-serif; color: var(--red); }
+  .mh .y { font: 400 1.4rem "Bebas Neue", sans-serif; letter-spacing: .15em; }
+  .mh p { margin: 0 0 0 auto; font: italic 500 1.1rem "Cormorant Garamond", "Noto Serif TC", serif; color: var(--muted); }
+  .dgrid { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 320px; gap: 12px; }
+  .d { margin: 0; position: relative; overflow: hidden; background: #ddd; }
+  .d.tall { grid-row: span 2; }
+  .d.wide { grid-column: span 2; }
+  .d img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s; }
+  .d:hover img { transform: scale(1.04); }
+  .d figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 22px 12px 10px; color: #fff; font-size: .82rem; letter-spacing: .05em;
+    background: linear-gradient(transparent, rgba(0,0,0,.6)); }
+  .d.note { background: var(--red); color: #fff; display: flex; flex-direction: column; justify-content: center; padding: 22px; }
+  .d.note b { font: 400 3rem/1 "Bebas Neue", sans-serif; }
+  .d.note p { margin: 6px 0; font: 900 1.4rem/1.35 "Noto Serif TC", serif; }
+  .d.note small { font: 400 .95rem "Bebas Neue"; letter-spacing: .2em; opacity: .85; }
+  @media (max-width: 760px) {
+    .dgrid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 220px; }
+    .mh p { margin-left: 0; width: 100%; }
+  }
 
   /* 拉引句 */
   .pull { background: var(--ink); color: #fff; padding: 110px 20px; text-align: center; position: relative; overflow: hidden; }
@@ -165,7 +181,7 @@
   <img src="IMG_8804%202.jpg" alt="郭芊瑜在夜晚的山上看城市燈火">
   <div class="topline">
     <span>VOL.01 · THE NIGHT VIEW ISSUE</span>
-    <nav><a href="#about">ABOUT</a><a href="#loves">LOVES</a><a href="#now">NOW</a><a href="#contact">CONTACT</a></nav>
+    <nav><a href="#about">ABOUT</a><a href="#dump">DUMP</a><a href="#now">NOW</a><a href="#contact">CONTACT</a></nav>
   </div>
   <h1 class="mast">CHIEN</h1>
   <div class="cl">
@@ -204,7 +220,7 @@
     </div>
     <ul class="toc">
       <li><a href="#about"><span class="n">01</span><b>關於我<small>我是誰</small></b><span class="en">ABOUT</span></a></li>
-      <li><a href="#loves"><span class="n">02</span><b>我喜歡的事<small>五件讓我心動的小事</small></b><span class="en">LOVES</span></a></li>
+      <li><a href="#dump"><span class="n">02</span><b>每月 DUMP<small>每個月的生活碎片</small></b><span class="en">DUMP</span></a></li>
       <li><a href="#now"><span class="n">03</span><b>最近在做<small>正在發生的事</small></b><span class="en">NOW</span></a></li>
       <li><a href="#contact"><span class="n">04</span><b>找到我<small>來 IG 打聲招呼</small></b><span class="en">CONTACT</span></a></li>
     </ul>
@@ -219,7 +235,7 @@
         <div class="bio">
           <p>嗨，我是芊瑜，一個住在新北的學生。這裡是我在網路上的小角落，放著我是誰、喜歡什麼，還有正在學習的事情。</p>
           <p>我很喜歡在晚上往山上跑，看著遠方一整片城市的燈光，會覺得很安靜也很療癒，好像所有煩惱都變小了。</p>
-          <p>最近開始學寫網頁，這個網站就是我做的第一個作品。今年的小目標，是把它慢慢變成自己很滿意的樣子，然後收集更多夜景。</p>
+          <p>最近開始學寫網頁，這個網站就是我做的第一個作品。今年的小目標，是把它慢慢變成自己很滿意的樣子。</p>
         </div>
       </div>
       <figure class="portrait" style="margin:0">
@@ -231,15 +247,16 @@
   </section>
 
   <!-- 02 喜歡的事 -->
-  <section class="chap reveal" id="loves">
-    <div class="chap-head"><span class="n">02</span><h2>我喜歡的事</h2><span class="en">Things I Love</span></div>
-    <ol class="loves">
-      <li><span class="n">01</span><div><b>夜景<span>night view</span></b><p>山上的風和城市的燈，看多久都不會膩。</p></div></li>
-      <li><span class="n">02</span><div><b>爬山<span>hiking</span></b><p>走一段路，換一片風景。</p></div></li>
-      <li><span class="n">03</span><div><b>看星星<span>stargazing</span></b><p>抬頭找找今晚有哪些星星。</p></div></li>
-      <li><span class="n">04</span><div><b>寫網頁<span>coding</span></b><p>正在學，邊做邊玩，這個網站就是成果。</p></div></li>
-      <li><span class="n">05</span><div><b>拍照<span>photography</span></b><p>把喜歡的瞬間留下來。</p></div></li>
-    </ol>
+  <section class="chap reveal" id="dump">
+    <div class="chap-head"><span class="n">02</span><h2>每月 DUMP</h2><span class="en">Monthly Dump</span></div>
+    <article class="month">
+      <header class="mh"><span class="m">NOV</span><span class="y">2026</span><p>第一個網站上線的一個月</p></header>
+      <div class="dgrid">
+        <figure class="d"><img src="IMG_8804%202.jpg" alt="晚上在山上看夜景" loading="lazy"><figcaption>山上的夜晚</figcaption></figure>
+        <figure class="d"><img data-same="selfie" alt="陽光下的自拍" loading="lazy"><figcaption>陽光很好的一天</figcaption></figure>
+        <div class="d note"><b>✓</b><p>做出了<br>第一個網站</p><small>NOV 2026</small></div>
+      </div>
+    </article>
   </section>
 </main>
 
@@ -255,7 +272,7 @@
     <div class="chap-head"><span class="n">03</span><h2>最近在做</h2><span class="en">What's Happening</span></div>
     <div class="now">
       <article><time>NOV 2026</time><h3>第一個個人網站上線</h3><p>從零開始，學會把網頁放上 GitHub。</p></article>
-      <article><time>ONGOING</time><h3>收集更多夜景</h3><p>想把喜歡的觀景點一個一個走過。</p></article>
+      <article><time>ONGOING</time><h3>每月更新 DUMP</h3><p>把每個月的生活碎片收進這裡。</p></article>
       <article><time>NEXT</time><h3>讓網站越來越豐富</h3><p>加入更多照片和生活紀錄。</p></article>
     </div>
   </section>
@@ -275,6 +292,10 @@
     if (e.isIntersecting) { e.target.classList.add("show"); io.unobserve(e.target); }
   }), { threshold: 0.1 });
   document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+  // DUMP 裡重複用到的自拍照，直接沿用關於我那張，檔案不用變大
+  const selfie = document.querySelector(".portrait img").src;
+  document.querySelectorAll('img[data-same="selfie"]').forEach(i => i.src = selfie);
 
   // 基本資料卡：大螢幕放在封面上，小螢幕移到封面下方
   const prof = document.querySelector(".profile"), cover = document.querySelector(".cover"), mq = matchMedia("(max-width: 1000px)");
