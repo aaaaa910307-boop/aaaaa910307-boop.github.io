@@ -3,6 +3,100 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>郭芊瑜</title>
+<meta name="description" content="郭芊瑜的個人網頁">
+<style>
+  :root {
+    --bg: #f6f4f0; --card: #ffffff; --text: #1f1d1a; --muted: #6f6a63;
+    --line: #e6e1d9; --accent: #3d6fb6; --soft: #e9eef7;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0f1115; --card: #181b21; --text: #eceae6; --muted: #a29d95;
+      --line: #2a2e36; --accent: #8fb3ff; --soft: #1c2433;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+    font: 17px/1.8 -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", sans-serif; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 16px; }
+  a { color: var(--accent); }
+
+  /* 首頁大區塊 */
+  .hero { display: grid; grid-template-columns: 1fr 1.1fr; gap: 48px; align-items: center; padding: 72px 0 56px; }
+  .hero img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 45% 30%;
+    border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,.18); display: block; }
+  .hi { color: var(--muted); letter-spacing: .1em; font-size: .9rem; margin: 0; }
+  h1 { font-size: clamp(2.4rem, 7vw, 3.6rem); line-height: 1.15; margin: 8px 0 16px; letter-spacing: .02em; }
+  .lead { font-size: 1.15rem; margin: 0; }
+
+  section { padding: 40px 0; border-top: 1px solid var(--line); }
+  h2 { font-size: .85rem; letter-spacing: .2em; color: var(--muted); font-weight: 600; margin: 0 0 16px; }
+  .about p { margin: 0 0 1em; max-width: 60ch; }
+
+  .likes { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px; }
+  .like { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 18px; }
+  .like .icon { font-size: 1.6rem; line-height: 1; }
+  .like b { display: block; margin-top: 10px; }
+  .like span { color: var(--muted); font-size: .9rem; line-height: 1.6; display: block; }
+
+  .contact { display: flex; flex-wrap: wrap; gap: 10px; }
+  .contact a { text-decoration: none; background: var(--soft); color: var(--accent);
+    padding: 10px 18px; border-radius: 999px; font-weight: 600; font-size: .95rem; }
+  .contact a:hover { filter: brightness(.95); }
+
+  footer { padding: 32px 0 48px; color: var(--muted); font-size: .8rem; border-top: 1px solid var(--line); }
+
+  @media (max-width: 680px) {
+    .hero { grid-template-columns: 1fr; gap: 28px; padding: 32px 0 40px; }
+    .hero img { max-width: 360px; }
+  }
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <header class="hero">
+    <img src="IMG_8804%202.jpg" alt="郭芊瑜在夜晚的山上看城市燈火">
+    <div>
+      <p class="hi">HELLO, I'M</p>
+      <h1>郭芊瑜</h1>
+      <p class="lead">喜歡在夜裡上山看城市的燈火，也正在學著用程式，一點一點打造屬於自己的小角落。</p>
+    </div>
+  </header>
+
+  <section class="about">
+    <h2>關於我</h2>
+    <p>嗨，我是芊瑜。這裡是我在網路上的小角落，記錄我是誰、喜歡什麼，還有正在學習的事情。</p>
+    <p>平常喜歡往山上跑，尤其是晚上，看著遠方一整片城市的燈光，會覺得很安靜也很療癒。最近開始學寫網頁，這個網站就是我做的第一個作品。</p>
+  </section>
+
+  <section>
+    <h2>喜歡的事</h2>
+    <div class="likes">
+      <div class="like"><div class="icon">🌃</div><b>夜景</b><span>山上的風和城市的燈</span></div>
+      <div class="like"><div class="icon">⛰️</div><b>爬山</b><span>走一段路，換一片風景</span></div>
+      <div class="like"><div class="icon">💻</div><b>寫網頁</b><span>正在學，邊做邊玩</span></div>
+      <div class="like"><div class="icon">📷</div><b>拍照</b><span>把喜歡的瞬間留下來</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>找到我</h2>
+    <div class="contact">
+      <a href="https://github.com/aaaaa910307-boop" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </section>
+
+  <footer>© 2026 郭芊瑜</footer>
+</main>
+</body>
+</html>
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>個人網頁</title>
 <style>
   :root {
