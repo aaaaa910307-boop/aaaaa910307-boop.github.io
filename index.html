@@ -104,27 +104,40 @@
 
 
   /* 每月 DUMP */
-  .month { margin-bottom: 56px; }
-  .month:last-child { margin-bottom: 0; }
-  .mh { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; border-bottom: 2px solid var(--ink); padding-bottom: 10px; }
-  .mh .m { font: 400 3.6rem/0.9 "Bebas Neue", sans-serif; color: var(--red); }
-  .mh .y { font: 400 1.4rem "Bebas Neue", sans-serif; letter-spacing: .15em; }
-  .mh p { margin: 0 0 0 auto; font: italic 500 1.1rem "Cormorant Garamond", "Noto Serif TC", serif; color: var(--muted); }
-  .dgrid { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 320px; gap: 12px; }
-  .d { margin: 0; position: relative; overflow: hidden; background: #ddd; }
-  .d.tall { grid-row: span 2; }
-  .d.wide { grid-column: span 2; }
-  .d img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s; }
-  .d:hover img { transform: scale(1.04); }
-  .d figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 22px 12px 10px; color: #fff; font-size: .82rem; letter-spacing: .05em;
-    background: linear-gradient(transparent, rgba(0,0,0,.6)); }
-  .d.note { background: var(--red); color: #fff; display: flex; flex-direction: column; justify-content: center; padding: 22px; }
-  .d.note b { font: 400 3rem/1 "Bebas Neue", sans-serif; }
-  .d.note p { margin: 6px 0; font: 900 1.4rem/1.35 "Noto Serif TC", serif; }
-  .d.note small { font: 400 .95rem "Bebas Neue"; letter-spacing: .2em; opacity: .85; }
+  .year { margin-bottom: 56px; }
+  .year:last-child { margin-bottom: 0; }
+  .yh { display: flex; align-items: baseline; justify-content: space-between; border-bottom: 2px solid var(--ink); padding-bottom: 8px; margin-bottom: 20px; }
+  .yh .y { font: 400 3.4rem/0.9 "Bebas Neue", sans-serif; color: var(--red); }
+  .yh .c { font: 400 1rem "Bebas Neue"; letter-spacing: .2em; color: var(--muted); }
+  .yh .c { margin-left: 14px; margin-right: auto; }
+  .yh .nav { display: flex; gap: 8px; }
+  .pg { all: unset; cursor: pointer; width: 40px; height: 40px; display: grid; place-items: center; border: 2px solid var(--ink);
+    font: 400 1.8rem/1 "Bebas Neue", sans-serif; transition: background .2s, color .2s, opacity .2s; }
+  .pg:hover { background: var(--ink); color: #fff; }
+  .pg:disabled { opacity: .25; cursor: default; background: none; color: var(--ink); }
+  /* 一年一橫排，左右翻頁 */
+  .dcards { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding: 0 8px; scroll-behavior: smooth;
+    padding: 6px 4px 18px 8px; margin: 0 -4px; scrollbar-width: thin; scrollbar-color: var(--red) transparent; overscroll-behavior-x: contain; }
+  .dcards::-webkit-scrollbar { height: 6px; }
+  .dcards::-webkit-scrollbar-thumb { background: var(--red); }
+  .dcards .dc { flex: 0 0 calc((100% - 40px) / 3); scroll-snap-align: start; }
+  .dc { all: unset; cursor: zoom-in; display: block; position: relative; background: #fff; box-shadow: 0 6px 20px rgba(0,0,0,.08); transition: transform .25s, box-shadow .25s; }
+  .dc:hover, .dc:focus-visible { transform: translateY(-4px); box-shadow: 0 14px 34px rgba(0,0,0,.16); }
+  .dc:focus-visible { outline: 3px solid var(--red); outline-offset: 3px; }
+  .dc img { display: block; width: 100%; height: auto; aspect-ratio: 800 / 1120; object-fit: cover; }
+  .dc span { position: absolute; top: 10px; left: -6px; background: var(--red); color: #fff; font: 400 .9rem "Bebas Neue"; letter-spacing: .15em; padding: 3px 10px 1px; }
+  .lb { position: fixed; inset: 0; z-index: 50; background: rgba(10,10,10,.92); display: flex; align-items: center; justify-content: center; padding: 20px; }
+  .lb[hidden] { display: none; }
+  .lb img { max-width: min(92vw, 720px); max-height: 92vh; width: auto; height: auto; box-shadow: 0 10px 40px rgba(0,0,0,.5); }
+  .lb button { all: unset; cursor: pointer; position: absolute; color: #fff; font: 400 3rem/1 "Bebas Neue", sans-serif; padding: 10px 16px; }
+  .lb button:hover { color: var(--red); }
+  .lb-x { top: 10px; right: 14px; }
+  .lb-prev { left: 8px; top: 50%; transform: translateY(-50%); }
+  .lb-next { right: 8px; top: 50%; transform: translateY(-50%); }
   @media (max-width: 760px) {
-    .dgrid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 220px; }
-    .mh p { margin-left: 0; width: 100%; }
+    .dcards { gap: 14px; }
+    .dcards .dc { flex-basis: 72%; }
+    .pg { width: 34px; height: 34px; }
   }
 
   /* 拉引句 */
@@ -220,7 +233,7 @@
     </div>
     <ul class="toc">
       <li><a href="#about"><span class="n">01</span><b>關於我<small>我是誰</small></b><span class="en">ABOUT</span></a></li>
-      <li><a href="#dump"><span class="n">02</span><b>每月 DUMP<small>每個月的生活碎片</small></b><span class="en">DUMP</span></a></li>
+      <li><a href="#dump"><span class="n">02</span><b>每月 DUMP<small>2023 – 2026 的生活碎片</small></b><span class="en">DUMP</span></a></li>
       <li><a href="#now"><span class="n">03</span><b>最近在做<small>正在發生的事</small></b><span class="en">NOW</span></a></li>
       <li><a href="#contact"><span class="n">04</span><b>找到我<small>來 IG 打聲招呼</small></b><span class="en">CONTACT</span></a></li>
     </ul>
@@ -249,15 +262,52 @@
   <!-- 02 喜歡的事 -->
   <section class="chap reveal" id="dump">
     <div class="chap-head"><span class="n">02</span><h2>每月 DUMP</h2><span class="en">Monthly Dump</span></div>
-    <article class="month">
-      <header class="mh"><span class="m">NOV</span><span class="y">2026</span><p>第一個網站上線的一個月</p></header>
-      <div class="dgrid">
-        <figure class="d"><img src="IMG_8804%202.jpg" alt="晚上在山上看夜景" loading="lazy"><figcaption>山上的夜晚</figcaption></figure>
-        <figure class="d"><img data-same="selfie" alt="陽光下的自拍" loading="lazy"><figcaption>陽光很好的一天</figcaption></figure>
-        <div class="d note"><b>✓</b><p>做出了<br>第一個網站</p><small>NOV 2026</small></div>
+    <div class="year">
+      <header class="yh"><span class="y">2026</span><span class="c">7 MONTHS</span><span class="nav"><button class="pg prev" type="button" aria-label="2026 上一頁">‹</button><button class="pg next" type="button" aria-label="2026 下一頁">›</button></span></header>
+      <div class="dcards">
+        <button class="dc" type="button" data-full="dump/2026-11.jpg" aria-label="2026 年 十一月 的照片"><img src="dump/2026-11.jpg" alt="2026 年十一月的生活照片拼貼" loading="lazy" width="800" height="1120"><span>NOV 2026</span></button>
+        <button class="dc" type="button" data-full="dump/2026-10.jpg" aria-label="2026 年 十月 的照片"><img src="dump/2026-10.jpg" alt="2026 年十月的生活照片拼貼" loading="lazy" width="800" height="1120"><span>OCT 2026</span></button>
+        <button class="dc" type="button" data-full="dump/2026-09.jpg" aria-label="2026 年 九月 的照片"><img src="dump/2026-09.jpg" alt="2026 年九月的生活照片拼貼" loading="lazy" width="800" height="1120"><span>SEP 2026</span></button>
+        <button class="dc" type="button" data-full="dump/2026-07.jpg" aria-label="2026 年 七月 的照片"><img src="dump/2026-07.jpg" alt="2026 年七月的生活照片拼貼" loading="lazy" width="800" height="1120"><span>JUL 2026</span></button>
+        <button class="dc" type="button" data-full="dump/2026-04.jpg" aria-label="2026 年 四月 的照片"><img src="dump/2026-04.jpg" alt="2026 年四月的生活照片拼貼" loading="lazy" width="800" height="1120"><span>APR 2026</span></button>
+        <button class="dc" type="button" data-full="dump/2026-03.jpg" aria-label="2026 年 三月 的照片"><img src="dump/2026-03.jpg" alt="2026 年三月的生活照片拼貼" loading="lazy" width="800" height="1120"><span>MAR 2026</span></button>
+        <button class="dc" type="button" data-full="dump/2026-01.jpg" aria-label="2026 年 一月 的照片"><img src="dump/2026-01.jpg" alt="2026 年一月的生活照片拼貼" loading="lazy" width="800" height="1120"><span>JAN 2026</span></button>
       </div>
-    </article>
+    </div>
+    <div class="year">
+      <header class="yh"><span class="y">2025</span><span class="c">5 MONTHS</span><span class="nav"><button class="pg prev" type="button" aria-label="2025 上一頁">‹</button><button class="pg next" type="button" aria-label="2025 下一頁">›</button></span></header>
+      <div class="dcards">
+        <button class="dc" type="button" data-full="dump/2025-12.jpg" aria-label="2025 年 十二月 的照片"><img src="dump/2025-12.jpg" alt="2025 年十二月的生活照片拼貼" loading="lazy" width="800" height="1120"><span>DEC 2025</span></button>
+        <button class="dc" type="button" data-full="dump/2025-11.jpg" aria-label="2025 年 十一月 的照片"><img src="dump/2025-11.jpg" alt="2025 年十一月的生活照片拼貼" loading="lazy" width="800" height="1120"><span>NOV 2025</span></button>
+        <button class="dc" type="button" data-full="dump/2025-10.jpg" aria-label="2025 年 十月 的照片"><img src="dump/2025-10.jpg" alt="2025 年十月的生活照片拼貼" loading="lazy" width="800" height="1120"><span>OCT 2025</span></button>
+        <button class="dc" type="button" data-full="dump/2025-02.jpg" aria-label="2025 年 二月 的照片"><img src="dump/2025-02.jpg" alt="2025 年二月的生活照片拼貼" loading="lazy" width="800" height="1120"><span>FEB 2025</span></button>
+        <button class="dc" type="button" data-full="dump/2025-01.jpg" aria-label="2025 年 一月 的照片"><img src="dump/2025-01.jpg" alt="2025 年一月的生活照片拼貼" loading="lazy" width="800" height="1120"><span>JAN 2025</span></button>
+      </div>
+    </div>
+    <div class="year">
+      <header class="yh"><span class="y">2024</span><span class="c">2 MONTHS</span><span class="nav"><button class="pg prev" type="button" aria-label="2024 上一頁">‹</button><button class="pg next" type="button" aria-label="2024 下一頁">›</button></span></header>
+      <div class="dcards">
+        <button class="dc" type="button" data-full="dump/2024-12.jpg" aria-label="2024 年 十二月 的照片"><img src="dump/2024-12.jpg" alt="2024 年十二月的生活照片拼貼" loading="lazy" width="800" height="1120"><span>DEC 2024</span></button>
+        <button class="dc" type="button" data-full="dump/2024-11.jpg" aria-label="2024 年 十一月 的照片"><img src="dump/2024-11.jpg" alt="2024 年十一月的生活照片拼貼" loading="lazy" width="800" height="1120"><span>NOV 2024</span></button>
+      </div>
+    </div>
+    <div class="year">
+      <header class="yh"><span class="y">2023</span><span class="c">5 MONTHS</span><span class="nav"><button class="pg prev" type="button" aria-label="2023 上一頁">‹</button><button class="pg next" type="button" aria-label="2023 下一頁">›</button></span></header>
+      <div class="dcards">
+        <button class="dc" type="button" data-full="dump/2023-09.jpg" aria-label="2023 年 九月 的照片"><img src="dump/2023-09.jpg" alt="2023 年九月的生活照片拼貼" loading="lazy" width="800" height="1120"><span>SEP 2023</span></button>
+        <button class="dc" type="button" data-full="dump/2023-07.jpg" aria-label="2023 年 七月 的照片"><img src="dump/2023-07.jpg" alt="2023 年七月的生活照片拼貼" loading="lazy" width="800" height="1120"><span>JUL 2023</span></button>
+        <button class="dc" type="button" data-full="dump/2023-06.jpg" aria-label="2023 年 六月 的照片"><img src="dump/2023-06.jpg" alt="2023 年六月的生活照片拼貼" loading="lazy" width="800" height="1120"><span>JUN 2023</span></button>
+        <button class="dc" type="button" data-full="dump/2023-04.jpg" aria-label="2023 年 四月 的照片"><img src="dump/2023-04.jpg" alt="2023 年四月的生活照片拼貼" loading="lazy" width="800" height="1120"><span>APR 2023</span></button>
+        <button class="dc" type="button" data-full="dump/2023-03.jpg" aria-label="2023 年 三月 的照片"><img src="dump/2023-03.jpg" alt="2023 年三月的生活照片拼貼" loading="lazy" width="800" height="1120"><span>MAR 2023</span></button>
+      </div>
+    </div>
   </section>
+  <div class="lb" id="lb" hidden>
+    <button class="lb-x" type="button" aria-label="關閉">×</button>
+    <button class="lb-prev" type="button" aria-label="上一張">‹</button>
+    <img alt="">
+    <button class="lb-next" type="button" aria-label="下一張">›</button>
+  </div>
 </main>
 
 <!-- 拉引句 -->
@@ -293,9 +343,27 @@
   }), { threshold: 0.1 });
   document.querySelectorAll(".reveal").forEach(el => io.observe(el));
 
-  // DUMP 裡重複用到的自拍照，直接沿用關於我那張，檔案不用變大
-  const selfie = document.querySelector(".portrait img").src;
-  document.querySelectorAll('img[data-same="selfie"]').forEach(i => i.src = selfie);
+  // 每年一排：左右翻頁按鈕
+  document.querySelectorAll(".year").forEach(yr => {
+    const row = yr.querySelector(".dcards"), prev = yr.querySelector(".pg.prev"), next = yr.querySelector(".pg.next");
+    const step = () => row.querySelector(".dc").getBoundingClientRect().width + 20;
+    const pageBy = dir => row.scrollBy({ left: dir * Math.max(step(), Math.round(row.clientWidth / step()) * step()), behavior: "smooth" });
+    const sync = () => { prev.disabled = row.scrollLeft < 4; next.disabled = row.scrollLeft + row.clientWidth >= row.scrollWidth - 4; };
+    prev.onclick = () => pageBy(-1); next.onclick = () => pageBy(1);
+    row.addEventListener("scroll", sync, { passive: true }); addEventListener("resize", sync); sync();
+  });
+
+  // DUMP 點照片放大，可左右切換
+  const lb = document.getElementById("lb"), lbImg = lb.querySelector("img");
+  const cards = [...document.querySelectorAll(".dc")]; let cur = 0;
+  function show(i) { cur = (i + cards.length) % cards.length; lbImg.src = cards[cur].dataset.full; lbImg.alt = cards[cur].getAttribute("aria-label"); }
+  cards.forEach((c, i) => c.addEventListener("click", () => { show(i); lb.hidden = false; document.body.style.overflow = "hidden"; }));
+  function closeLb() { lb.hidden = true; document.body.style.overflow = ""; cards[cur].focus(); }
+  lb.querySelector(".lb-x").onclick = closeLb;
+  lb.querySelector(".lb-prev").onclick = e => { e.stopPropagation(); show(cur - 1); };
+  lb.querySelector(".lb-next").onclick = e => { e.stopPropagation(); show(cur + 1); };
+  lb.addEventListener("click", e => { if (e.target === lb) closeLb(); });
+  addEventListener("keydown", e => { if (lb.hidden) return; if (e.key === "Escape") closeLb(); if (e.key === "ArrowLeft") show(cur - 1); if (e.key === "ArrowRight") show(cur + 1); });
 
   // 基本資料卡：大螢幕放在封面上，小螢幕移到封面下方
   const prof = document.querySelector(".profile"), cover = document.querySelector(".cover"), mq = matchMedia("(max-width: 1000px)");
